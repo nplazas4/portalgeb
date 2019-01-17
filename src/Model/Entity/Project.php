@@ -10,16 +10,27 @@ use Cake\ORM\Entity;
  * @property string $ID_PROJECT
  * @property string $PROJECT_NAME
  * @property string $DESCRIPTION
- * @property \Cake\I18n\FrozenTime $PLANNED_START_DATE
- * @property \Cake\I18n\FrozenTime $PLANNED_FINISH_DATE
  * @property float $SPI
- * @property int $EXECUTED
  * @property int $PLANNED
- * @property float $ACPU
+ * @property int $EXECUTED
+ * @property float $AC
+ * @property float $PV
  * @property int $CAPEX_PLANNED
  * @property int $CAPEX_EXECUTED
+ * @property int $FASE
  * @property string $REGIONAL
- * @property int $EPS_OBJECT_ID
+ * @property string $ALCANCE
+ * @property string $SOLICITUD
+ * @property int $DISTANCIA
+ * @property int $LINEA_TRANS
+ * @property \Cake\I18n\FrozenDate $FOPO
+ * @property \Cake\I18n\FrozenDate $FEPO
+ * @property \Cake\I18n\FrozenDate $ADJUDICACION
+ * @property \Cake\I18n\FrozenDate $APROBACION
+ * @property int $TORRE
+ * @property int $NUM_SUBESTACION
+ * @property int $CODE_EPS
+ * @property int $PROJECT_RISK
  */
 class Project extends Entity
 {
@@ -37,15 +48,26 @@ class Project extends Entity
         'ID_PROJECT' => true,
         'PROJECT_NAME' => true,
         'DESCRIPTION' => true,
-        'PLANNED_START_DATE' => true,
-        'PLANNED_FINISH_DATE' => true,
         'SPI' => true,
-        'EXECUTED' => true,
         'PLANNED' => true,
-        'ACPU' => true,
+        'EXECUTED' => true,
+        'AC' => true,
+        'PV' => true,
         'CAPEX_PLANNED' => true,
         'CAPEX_EXECUTED' => true,
+        'FASE' => true,
         'REGIONAL' => true,
-        'EPS_OBJECT_ID' => true
+        'ALCANCE' => true,
+        'SOLICITUD' => true,
+        'DISTANCIA' => true,
+        'LINEA_TRANS' => true,
+        'FOPO' => true,
+        'FEPO' => true,
+        'ADJUDICACION' => true,
+        'APROBACION' => true,
+        'TORRE' => true,
+        'NUM_SUBESTACION' => true,
+        'CODE_EPS' => true,
+        'PROJECT_RISK' => true
     ];
 }

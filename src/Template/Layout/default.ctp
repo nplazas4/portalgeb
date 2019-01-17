@@ -28,10 +28,10 @@
     ];
     // Menu
     $menu = [
-        [ 'PORTAL PROYECTOS', 'index'],
-        [ 'RyOS', 'companies'],
-        [ 'PORTAFOLIO', 'company'],
-        [ 'PROYECTOS PEC', 'projects']
+        [ 'PORTAL PROYECTOS', 'index','PortalProjects'],
+        [ 'RyOS', 'companies','PortalProjects'],
+        [ 'PORTAFOLIO', 'company','PortalProjects'],
+        [ 'PROYECTOS PEC', 'projects','PortalProjects'],
     ];
 ?>
 <!DOCTYPE html>
@@ -44,10 +44,18 @@
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
-
     <?= $this->Html->css('materialize.css') ?>
+      <?= $this->Html->script(['jquery-3.3.1.min.js']) ?>
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+<link type="text/css" rel="stylesheet" href="jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="jsgrid-theme.min.css" />
+
+<script type="text/javascript" src="jsgrid.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -99,11 +107,17 @@
                     <!-- <li><a href="<?= $item[1] ?>"><?= $item[0] ?></a></li> -->
                 <li>
                     <?php echo $this->Html->link($item[0],
-                      ['controller'=>'PortalProjects', 'action'=>$item[1]],
+                      ['controller'=>$item[2], 'action'=>$item[1]],
                       ['escape' => false]
                     );?>
                 </li>
                 <?php endforeach; ?>
+                <li>
+                  <?php echo $this->Html->link('PORTAL ALTERNO',
+                    ['controller'=>'Projects', 'action'=>'index'],
+                    ['escape' => false]
+                  );?>
+                </li>
                <?php //endif;?>
              <?php //endif;?>
                 </ul>
@@ -135,11 +149,17 @@
             <!-- <li><a class="waves-effect pl-4" href="<?= $item[1] ?>"><?= $item[0] ?></a></li> -->
           <li>
             <?php echo $this->Html->link($item[0],
-              ['controller'=>'PortalProjects', 'action'=>$item[1]],
+              ['controller'=>$item[2], 'action'=>$item[1]],
               ['escape' => false,'class'=>'waves-effect pl-4']
             );?>
           </li>
         <?php endforeach; ?>
+        <li>
+          <?php echo $this->Html->link('PORTAL ALTERNO',
+            ['controller'=>'Projects', 'action'=>'index'],
+            ['escape' => false,'class'=>'waves-effect pl-4']
+          );?>
+        </li>
     </ul>
 
     <?= $this->Flash->render() ?>
@@ -181,63 +201,63 @@
     <script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
     <script type="text/javascript">
         // Porcentajes de avances
-        AmCharts.makeChart("advance",
-            {
-                "type": "gauge",
-                "theme": "light",
-                "language": "es",
-                "axes": [
-                    {
-                        "axisAlpha": 0,
-                        "tickAlpha": 0,
-                        "labelsEnabled": false,
-                        "startValue": 0,
-                        "endValue": 100,
-                        "startAngle": 0,
-                        "endAngle": 360,
-                        "bands": [
-                            // Usuarios perdidos
-                            {
-                                "color": "#eee",
-                                "startValue": 0,
-                                "endValue": 100,
-                                "radius": "100%",
-                                "innerRadius": "70%",
-                                "balloonText": "Avance planeado",
-                            },
-                            {
-                                "color": "#A6CE39",
-                                "startValue": 0,
-                                "endValue": 62.3,
-                                "radius": "100%",
-                                "innerRadius": "70%",
-                                "balloonText": "62.3% Avance planeado",
-                            },
-                            // Usuarios pagos
-                            {
-                                "color": "#E6E6E6",
-                                "startValue": 0,
-                                "endValue": 100,
-                                "radius": "70%",
-                                "innerRadius": "40%",
-                                "balloonText": "Ejecutado",
-                            },
-                            {
-                                "color": "#2CACE3",
-                                "startValue": 0,
-                                "endValue": 57.2,
-                                "radius": "70%",
-                                "innerRadius": "40%",
-                                "balloonText": "57.2% Ejecutado",
-                            },
-                        ]
-                    }
-                ],
-                "export": {
-                    "enabled": false
-                }
-            }
-        );
+        // AmCharts.makeChart("advance",
+        //     {
+        //         "type": "gauge",
+        //         "theme": "light",
+        //         "language": "es",
+        //         "axes": [
+        //             {
+        //                 "axisAlpha": 0,
+        //                 "tickAlpha": 0,
+        //                 "labelsEnabled": false,
+        //                 "startValue": 0,
+        //                 "endValue": 100,
+        //                 "startAngle": 0,
+        //                 "endAngle": 360,
+        //                 "bands": [
+        //                     // Usuarios perdidos
+        //                     {
+        //                         "color": "#eee",
+        //                         "startValue": 0,
+        //                         "endValue": 100,
+        //                         "radius": "100%",
+        //                         "innerRadius": "70%",
+        //                         "balloonText": "Avance planeado",
+        //                     },
+        //                     {
+        //                         "color": "#A6CE39",
+        //                         "startValue": 0,
+        //                         "endValue": 62.3,
+        //                         "radius": "100%",
+        //                         "innerRadius": "70%",
+        //                         "balloonText": "62.3% Avance planeado",
+        //                     },
+        //                     // Usuarios pagos
+        //                     {
+        //                         "color": "#E6E6E6",
+        //                         "startValue": 0,
+        //                         "endValue": 100,
+        //                         "radius": "70%",
+        //                         "innerRadius": "40%",
+        //                         "balloonText": "Ejecutado",
+        //                     },
+        //                     {
+        //                         "color": "#2CACE3",
+        //                         "startValue": 0,
+        //                         "endValue": 57.2,
+        //                         "radius": "70%",
+        //                         "innerRadius": "40%",
+        //                         "balloonText": "57.2% Ejecutado",
+        //                     },
+        //                 ]
+        //             }
+        //         ],
+        //         "export": {
+        //             "enabled": false
+        //         }
+        //     }
+        // );
 
         // Curva de avance físico
         AmCharts.makeChart("caf",

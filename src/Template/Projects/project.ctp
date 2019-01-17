@@ -1,12 +1,12 @@
 <?php
     // Breadcrumb
     $breadcrumb = [
-      [ 'Inicio', 'home','Pages'],
-      [ 'Portal Proyectos','index','PortalProjects'],
-      [ 'IDM','companies','PortalProjects'],
-      [ 'Unidad de Transmisión Colombia','company','PortalProjects' ],
-      [ 'Crecimiento','projects','PortalProjects'],
-      [ '﻿Nueva Subestación MOCOA (RENACER) 230 kV', '','PortalProjects'],
+      [ 'Inicio', 'home','Pages',''],
+      [ 'Portal Proyectos','index','PortalProjects',''],
+      [ 'IDM','companies','PortalProjects',''],
+      [ 'Unidad de Transmisión Colombia','company','PortalProjects',''],
+      [ 'Crecimiento','projects','Projects',''],
+      [ $projects->PROJECT_NAME,'project','projects',$projects->id],
     ];
 
     // Riesgos
@@ -69,7 +69,7 @@
 <script type="text/javascript" src="https://www.amcharts.com/lib/3/gauge.js"></script>
 <script src="https://www.amcharts.com/lib/3/lang/es.js"></script>
 <script type="text/javascript">
-/*
+
     // Porcentajes de avances
     AmCharts.makeChart("advance",
         {
@@ -98,10 +98,10 @@
                         {
                             "color": "#A6CE39",
                             "startValue": 0,
-                            "endValue": <?=$data1?>,
+                            "endValue": <?=$projects->PLANNED?>,
                             "radius": "100%",
                             "innerRadius": "70%",
-                            "balloonText": "<?=$data1?>% Avance planeado",
+                            "balloonText": "<?=$projects->PLANNED?>% Avance planeado",
                         },
                         // Usuarios pagos
                         {
@@ -115,10 +115,10 @@
                         {
                             "color": "#2CACE3",
                             "startValue": 0,
-                            "endValue": <?=$data2?>,
+                            "endValue": <?=$projects->EXECUTED?>,
                             "radius": "70%",
                             "innerRadius": "40%",
-                            "balloonText": "<?=$data2?>% Ejecutado",
+                            "balloonText": "<?=$projects->EXECUTED?>% Ejecutado",
                         },
                     ]
                 }
@@ -128,7 +128,7 @@
             }
         }
     );
-
+/*
     // Curva de avance físico
     AmCharts.makeChart("caf",
         {
@@ -357,36 +357,68 @@
         <?php foreach ($breadcrumb as $item): ?>
             <!-- <a href="<?= $item[1] ?>" class="breadcrumb"><?= $item[0] ?></a> -->
             <?php echo $this->Html->link($item[0],
-              ['controller'=>$item[2], 'action'=>$item[1]],
+              ['controller'=>$item[2], 'action'=>$item[1],$projects->id],
               ['escape' => false,'class'=>'breadcrumb']
             );?>
         <?php endforeach; ?>
     </div>
-    <!-- <<h1><?=$data1?></h1> -->
+    <?php
+    $n = intval($projects->FASE);
+    $res = '';
+
+    /*** Array con los numeros romanos  ***/
+    $roman_numerals = array(
+       'M'  => 1000,
+       'CM' => 900,
+       'D'  => 500,
+       'CD' => 400,
+       'C'  => 100,
+       'XC' => 90,
+       'L'  => 50,
+       'XL' => 40,
+       'X'  => 10,
+       'IX' => 9,
+       'V'  => 5,
+       'IV' => 4,
+       'I'  => 1);
+
+    foreach ($roman_numerals as $roman => $number)
+    {
+     /*** Dividir para encontrar resultados en array ***/
+     $matches = intval($n / $number);
+
+     /*** Asignar el numero romano al resultado ***/
+     $res .= str_repeat($roman, $matches);
+
+     /*** Descontar el numero romano al total ***/
+     $n = $n % $number;
+    }
+    ?>
+
     <sidebar class="project-sidebar">
-        <h1>Nueva Subestación MOCOA (RENACER) 230 kV</h1>
+        <h1><?=$projects->PROJECT_NAME?></h1>
         <div class="project-sidebar-phase orange">
-            <h2>Fase III</h2>
+            <h2>Fase <?=$res?></h2>
         </div>
         <div class="project-sidebar-percentages">
             <a class="copyright-amcharts" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
             <div class="chart" id="advance"></div>
             <div class="legend">
-                <h3 class="secondary-text">62.3% Avance planeado</h3>
-                <h3 class="accent-text">57.2% Ejecutado</h3>
+                <h3 class="secondary-text"><?= $projects->PLANNED ?>% Avance planeado</h3>
+                <h3 class="accent-text"><?= $projects->EXECUTED ?>% Ejecutado</h3>
             </div>
         </div>
         <div class="project-sidebar-info">
             <h2>Información general</h2>
-            <p>Es la segunda empresa en transmisión de electricidad en Colombia, con una participación en el mercado del 12.5%. Cuenta con 1.504 km de circuitos a 230 kV activos en 17 subestaciones y la disponibilidad del sistema de transmisión a 31 de diciembre del 2015 fue del 99,93%, superior a la meta fijada por la CREG.</p>
+            <p><?= $projects->DESCRIPTION ?></p>
         </div>
         <div class="project-sidebar-info">
             <h2>Alcance</h2>
-            <p>El alcance del proyecto corresponde a la puesta en servicio de la línea doble circuito a 230kV, desde la Subestación Chivor II hasta la Subestación Norte y desde la Subestación Norte hasta la Subestación Bacatá, incluyendo la modificación de las subestaciones Chivor y Bacatá y la instalación de las nuevas subestaciones Chivor II y Norte. El proyecto no incluye la administración, operación y mantenimiento durante 25 años contados desde la fecha oficial de puesta en operación de acuerdo con lo establecido en la normatividad aplicable.</p>
+            <p><?= $projects->ALCANCE ?></p>
         </div>
         <div class="project-sidebar-info">
             <h2>Solicitudes al MME modificaciones FOPO</h2>
-            <p>1. Resolución 4-1185 en la cual se otorgan 422 días de 525 solicitados, dando como Fecha de Entrada en Operación el 26 de Diciembre de 2016.2. Resolución 4-1248 en la cual se otorgan 145 días de 254 solicitados, dando como Fecha de Entrada en Operación el 20 de Mayo de 2017.3. Resolución 4-0510 en la cual se otorgan 176 días de 411 solicitados, dando como Fecha de Entrada en Operación el 25 de Noviembre de 2017.</p>
+            <p><?= $projects->SOLICITUD ?></p>
         </div>
     </sidebar>
 
@@ -396,12 +428,12 @@
                 <?= $this->Html->image('icons/torre-blanca.svg') ?>
                 <div class="data-distance-content">
                     <h2>Distancia</h2>
-                    <h3>162 Km</h3>
+                    <h3><?= $projects->DISTANCIA ?> Km</h3>
                     <div class="line-distance"></div>
                     <h4>de líneas de transmisión de</h4>
-                    <h5>230kV</h5>
+                    <h5><?= $projects->LINEA_TRANS ?>kV</h5>
                     <div class="divider white mt-3 mb-1"></div>
-                    <h6>344 Torres</h6>
+                    <h6><?= $projects->TORRE ?> Torres</h6>
                 </div>
                 <?= $this->Html->image('icons/torre-blanca.svg') ?>
             </div>
@@ -410,23 +442,23 @@
                 <ul>
                     <li>
                         <i class="material-icons">event</i>
-                        <span>FoPo: Enero 10, 2018</span>
+                        <span>FoPo: <?= $projects->FOPO ?></span>
                     </li>
                     <li>
                         <i class="material-icons">event_note</i>
-                        <span>Adjudicación: Enero 10, 2018</span>
+                        <span>Adjudicación: <?= $projects->ADJUDICACION ?></span>
                     </li>
                     <li>
                         <i class="material-icons">event_available</i>
-                        <span>Aprobación: Enero 10, 2018</span>
+                        <span>Aprobación: <?= $projects->ADJUDICACION ?></span>
                     </li>
                     <li>
                         <i class="material-icons">straighten</i>
-                        <span>Longitud: 162 Km</span>
+                        <span>Longitud: <?= $projects->DISTANCIA ?> Km</span>
                     </li>
                     <li>
                         <i class="material-icons">place</i>
-                        <span>No. de subestaciones: 2</span>
+                        <span>No. de subestaciones: <?= $projects->NUM_SUBESTACION ?></span>
                     </li>
                 </ul>
             </div>
@@ -440,17 +472,17 @@
             <h2>Indicadores de cronograma</h2>
             <div class="indicator primary">
                 <h2>SPI <small>Interno</small></h2>
-                <h3>0.91</h3>
+                <h3><?= $projects->SPI?></h3>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </div>
             <div class="indicator light-blue darken-2">
                 <h2>PORCENTAJE <small>AVANCE PLANEADO</small></h2>
-                <h3>62%</h3>
+                <h3><?= $projects->PLANNED ?>%</h3>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </div>
             <div class="indicator light-blue darken-3">
                 <h2>PORCENTAJE <small>EJECUTADO</small></h2>
-                <h3>57%</h3>
+                <h3><?= $projects->EXECUTED ?>%</h3>
                 <?= $this->Html->image('isotype-light.svg') ?>
             </div>
             <div class="indicator light-blue darken-2">
@@ -487,7 +519,7 @@
         <div class="chart">
             <h2>Curva de Avance Físico</h2>
             <div class="chart-content" id="caf"></div>
-            <a class="copyright-amcharts right-align" href="http://www.amcharts.com" title="JavaScript charts" target="_blank">JS chart por amCharts</a>
+
         </div>
 
         <div class="chart">
@@ -1069,7 +1101,7 @@
             </tr>
             <tr>
                 <th>Calificación Ponderada</th>
-                <td>25</td>
+                <td>26</td>
             </tr>
         </table>
     </div>

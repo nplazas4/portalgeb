@@ -67,24 +67,9 @@ class ProjectsTable extends Table
             ->notEmpty('DESCRIPTION');
 
         $validator
-            ->date('PLANNED_START_DATE')
-            ->requirePresence('PLANNED_START_DATE', 'create')
-            ->notEmpty('PLANNED_START_DATE');
-
-        $validator
-            ->date('PLANNED_FINISH_DATE')
-            ->requirePresence('PLANNED_FINISH_DATE', 'create')
-            ->notEmpty('PLANNED_FINISH_DATE');
-
-        $validator
             ->decimal('SPI')
             ->requirePresence('SPI', 'create')
             ->notEmpty('SPI');
-
-        $validator
-            ->integer('EXECUTED')
-            ->requirePresence('EXECUTED', 'create')
-            ->notEmpty('EXECUTED');
 
         $validator
             ->integer('PLANNED')
@@ -92,9 +77,19 @@ class ProjectsTable extends Table
             ->notEmpty('PLANNED');
 
         $validator
-            ->decimal('ACPU')
-            ->requirePresence('ACPU', 'create')
-            ->notEmpty('ACPU');
+            ->integer('EXECUTED')
+            ->requirePresence('EXECUTED', 'create')
+            ->notEmpty('EXECUTED');
+
+        $validator
+            ->decimal('AC')
+            ->requirePresence('AC', 'create')
+            ->notEmpty('AC');
+
+        $validator
+            ->decimal('PV')
+            ->requirePresence('PV', 'create')
+            ->notEmpty('PV');
 
         $validator
             ->integer('CAPEX_PLANNED')
@@ -107,15 +102,76 @@ class ProjectsTable extends Table
             ->notEmpty('CAPEX_EXECUTED');
 
         $validator
+            ->integer('FASE')
+            ->requirePresence('FASE', 'create')
+            ->notEmpty('FASE');
+
+        $validator
             ->scalar('REGIONAL')
-            ->maxLength('REGIONAL', 50)
             ->requirePresence('REGIONAL', 'create')
             ->notEmpty('REGIONAL');
 
         $validator
-            ->integer('EPS_OBJECT_ID')
-            ->requirePresence('EPS_OBJECT_ID', 'create')
-            ->notEmpty('EPS_OBJECT_ID');
+            ->scalar('ALCANCE')
+            ->maxLength('ALCANCE', 500)
+            ->requirePresence('ALCANCE', 'create')
+            ->notEmpty('ALCANCE');
+
+        $validator
+            ->scalar('SOLICITUD')
+            ->maxLength('SOLICITUD', 500)
+            ->requirePresence('SOLICITUD', 'create')
+            ->notEmpty('SOLICITUD');
+
+        $validator
+            ->integer('DISTANCIA')
+            ->requirePresence('DISTANCIA', 'create')
+            ->notEmpty('DISTANCIA');
+
+        $validator
+            ->integer('LINEA_TRANS')
+            ->requirePresence('LINEA_TRANS', 'create')
+            ->notEmpty('LINEA_TRANS');
+
+        $validator
+            ->date('FOPO')
+            ->requirePresence('FOPO', 'create')
+            ->notEmpty('FOPO');
+
+        $validator
+            ->date('FEPO')
+            ->requirePresence('FEPO', 'create')
+            ->notEmpty('FEPO');
+
+        $validator
+            ->date('ADJUDICACION')
+            ->requirePresence('ADJUDICACION', 'create')
+            ->notEmpty('ADJUDICACION');
+
+        $validator
+            ->date('APROBACION')
+            ->requirePresence('APROBACION', 'create')
+            ->notEmpty('APROBACION');
+
+        $validator
+            ->integer('TORRE')
+            ->requirePresence('TORRE', 'create')
+            ->notEmpty('TORRE');
+
+        $validator
+            ->integer('NUM_SUBESTACION')
+            ->requirePresence('NUM_SUBESTACION', 'create')
+            ->notEmpty('NUM_SUBESTACION');
+
+        $validator
+            ->integer('CODE_EPS')
+            ->requirePresence('CODE_EPS', 'create')
+            ->notEmpty('CODE_EPS');
+
+        $validator
+            ->integer('PROJECT_RISK')
+            ->requirePresence('PROJECT_RISK', 'create')
+            ->notEmpty('PROJECT_RISK');
 
         return $validator;
     }

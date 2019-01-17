@@ -12,25 +12,18 @@
      <div class="row">
        <div class="input-field col s6">
          <?php echo $this->Form->input('ID_PROJECT',['label'=>'','placeholder'=>'ID','class'=>'validate','required']);?>
-         <!-- <input id="Id_Proyecto" type="text" class="validate">
-         <label for="Id_Proyecto">ID de proyecto</label> -->
        </div>
        <div class="input-field col s6">
-         <!-- <input id="Nombre_Proyecto" type="text" class="validate">
-         <label for="Nombre_Proyecto">Nombre de proyecto</label> -->
          <?php echo $this->Form->input('PROJECT_NAME',['label'=>'','placeholder'=>'Nombre','class'=>'validate','required']);?>
        </div>
      </div>
      <div class="row">
        <div class="input-field col s12">
-         <!-- <input id="Nombre_Proyecto" type="text" class="validate">
-         <label for="Nombre_Proyecto">Nombre de proyecto</label> -->
          <?php echo $this->Form->textarea('DESCRIPTION',['label'=>'','placeholder'=>'Descripción','class'=>'materialize-textarea','required']);?>
        </div>
      </div>
      <div class="row">
        <div class="input-field col s6">
-         <!-- echo $this->Form->input('my_date', array('type' => 'text')); -->
          <?php echo $this->Form->input('PLANNED_START_DATE',['label'=>'','placeholder'=>'Inicio planificado','type'=>'text','class'=>'datepicker']);?>
        </div>
        <div class="input-field col s6">

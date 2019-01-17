@@ -2,7 +2,7 @@
     <div class="home-menu">
         <!-- <a href="/portal-projects" class="home-menu-item">
             <figure class="accent accent-text">
-                <?= $this->Html->image('icons/portal-proyectos.svg') ?>
+                <?//= $this->Html->image('icons/portal-proyectos.svg') ?>
             </figure>
             <h2 class="accent">Portal proyectos</h2>
         </a> -->
@@ -13,7 +13,7 @@
           array('escape' => false,'class'=>'home-menu-item'))?>
         <!-- <a href="" class="home-menu-item">
             <figure class="tertiary tertiary-text">
-                <?= $this->Html->image('icons/ryos.svg') ?>
+                <?//= $this->Html->image('icons/ryos.svg') ?>
             </figure>
             <h2 class="tertiary">RyOS</h2>
         </a> -->
@@ -24,7 +24,7 @@
           array('escape' => false,'class'=>'home-menu-item'))?>
         <!-- <a href="" class="home-menu-item">
             <figure class="primary primary-text">
-                <?= $this->Html->image('icons/portafolio.svg') ?>
+                <?//= $this->Html->image('icons/portafolio.svg') ?>
             </figure>
             <h2 class="primary">PORTAFOLIO</h2>
         </a> -->
@@ -35,7 +35,7 @@
           array('escape' => false,'class'=>'home-menu-item'))?>
         <!-- <a href="" class="home-menu-item">
             <figure class="secondary secondary-text">
-                <?= $this->Html->image('icons/documentos-gestion.svg') ?>
+                <?//= $this->Html->image('icons/documentos-gestion.svg') ?>
             </figure>
             <h2 class="secondary">DOCUMENTOS GESTIÓN DE PROGRAMAS Y PROYECTOS</h2>
         </a> -->

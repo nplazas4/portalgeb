@@ -43,7 +43,7 @@
           $this->Html->image('icons/torre-crecimiento.svg').
           $this->Html->tag('div',$this->Html->tag('h3','15'),array('class'=>'number')).
           $this->Html->tag('h2','Crecimiento'),
-          array('controller'=>'PortalProjects','action'=>'projects'),
+          array('controller'=>'Projects','action'=>'projects'),
           array('escape' => false,'class'=>'company-content-tower increase'))?>
     </div>
 </div>

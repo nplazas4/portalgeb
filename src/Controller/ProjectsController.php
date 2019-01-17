@@ -20,7 +20,7 @@ class ProjectsController extends AppController
       // $this->set(compact('users'));
       $projects = $this->paginate($this->Projects);
       $this->set('projects',$projects);
-
+      $this->Indicators();
       // $this->loadModel('Eps');
       // $eps = $this->Eps->find('all');
       // $this->set('eps', $eps->first());
@@ -81,10 +81,20 @@ class ProjectsController extends AppController
         }
         $this->set(compact('projects'));
     }
-    public function project(){
-      // put your code.
+    // public function project(){
+    //   // put your code.
+    // }
+    public function project($id)
+    {
+        $projects = $this->Projects->get($id);
+        $this->set('projects', $projects);
     }
     public function projects(){
       $this->index();
+    }
+    public function Indicators(){
+      $this->loadModel('Indicators');
+      $indicators= $this->Indicators->find('all');
+      $this->set('indicators',$indicators->first());
     }
 }

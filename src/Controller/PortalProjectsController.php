@@ -34,6 +34,10 @@ class PortalProjectsController extends AppController
 		$this->curva();
 		$this->view = '/Pages/project';
 	}
+	public function Projectcodes()
+	{
+		$this->view = '/Projectcodes/Codigos-proyecto';
+	}
 	public function curva()
 	{
 	  // $ch = curl_init();

@@ -76,90 +76,79 @@
         <div class="indicators">
         	<div class="indicator accent">
         		<h2>CAPEX USD</h2>
-        		<h3>$260.791.481</h3>
+        		<h3><span>$</span><?=$indicators->CAPEX_USD?></h3>
         		<i class="material-icons">language</i>
         	</div>
         	<div class="indicator tertiary">
         		<h2>CAPEX COP</h2>
-        		<h3>$444.791.481,235</h3>
+        		<h3><span>$</span><?=$indicators->CAPEX_COP?></h3>
         		<i class="material-icons">language</i>
         	</div>
         	<div class="indicator error">
         		<h2>RIESGOS</h2>
-        		<h3>9.56</h3>
+        		<h3><?=$indicators->RIESGOS?></h3>
         		<i class="material-icons">report_problem</i>
         	</div>
         	<div class="indicator warning">
         		<h2>SPI EXTERNO</h2>
-        		<h3>0.7</h3>
+        		<h3><?=$indicators->SPI_EXTERNO?></h3>
         		<i class="material-icons">show_chart</i>
         	</div>
         </div>
         <div class="divider transparent mb-3"></div>
-
+        <!--Código nuevo -->
         <div class="layout wrap">
-        	<?php foreach ($projects as $project): ?>
-        	<div class="flex">
-        		<div class="sheet" onclick="location.href='http://localhost/web/Portal-Projects/project'">
-	        		<div class="sheet-line regional-text text-<?= $project['regional'] ?>">
-	        			<div class="sheet-line-item"></div>
-	        			<div class="sheet-line-item"></div>
-	        			<div class="sheet-line-item"></div>
-	        		</div>
-	        		<div class="sheet-content pl-5">
-	        			<h2>﻿<?= $project->PROJECT_NAME ?></h2>
-	        			<div class="data-box">
-	        				<div class="data-box-circle
-	        					<?php
-	        						if ($project->SPI >= 0.98) {
-	        							echo 'primary';
-	        						} elseif ($project->SPI < 0.98 && $project->SPI >= 0.9) {
-	        							echo 'secondary';
-        							} elseif ($project->SPI < 0.9 && $project->SPI >= 0.8) {
-	        							echo 'warning';
-	        						} elseif ($project->SPI < 0.8) {
-	        							echo 'error';
-	        						}
-	        					?>">
-	        					<h3><?= $project->SPI ?></h3>
-	        				</div>
-	        				<div class="data-box-content">
-	        					<span>SPI Oficial</span>
-	        				</div>
-	        			</div>
-	        			<div class="data-box">
-	        				<div class="data-box-circle">
-	        					<h4><?= $project->EXECUTED ?>%</h4>
-	        					<div class="divider white"></div>
-	        					<h4><?= $project->PLANNED ?>%</h4>
-	        				</div>
-	        				<div class="data-box-content">
-		        				<span>% Ejecutado</span>
-		    					<div class="divider"></div>
-		    					<span>% Planeado</span>
-	        				</div>
-	        			</div>
-	        			<div class="data-box">
-	        				<div class="data-box-circle tertiary">
-	        					<h4><?= $project->ACPU ?>%</h4>
-	        				</div>
-	        				<div class="data-box-content">
-	        					<span>AC / PV</span>
-	        				</div>
-	        			</div>
-	        			<div class="divider transparent"></div>
-	        			<div class="data-chip accent">
-	        				<h3>CAPEX Planeado (USD)</h3>
-	        				<h4><?= $project->CAPEX_PLANNED ?> M</h4>
-	        			</div>
-	        			<div class="data-chip secondary mb-0">
-	        				<h3>CAPEX Ejecutado (USD)</h3>
-	        				<h4><?= $project->CAPEX_EXECUTED ?> M</h4>
-	        			</div>
-	        		</div>
-        		</div>
-        	</div>
-        	<?php endforeach; ?>
+          <?php foreach ($projects as $project): ?>
+            <?php
+              if ($project->SPI >= 0.98) {
+                $var = 'primary';
+              } elseif ($project->SPI < 0.98 && $project->SPI >= 0.9) {
+                $var = 'secondary';
+              } elseif ($project->SPI < 0.9 && $project->SPI >= 0.8) {
+                $var = 'warning';
+              } elseif ($project->SPI < 0.8) {
+                $var = 'error';
+              }
+            ?>
+          <div class="flex">
+            <?=$this->Html->link(
+              $this->Html->tag('div',$this->Html->tag('div',
+              $this->Html->tag('div','',array('class'=>'sheet-line-item')).
+              $this->Html->tag('div','',array('class'=>'sheet-line-item')).
+              $this->Html->tag('div','',array('class'=>'sheet-line-item')),
+              array('class'=>'sheet-line regional-text text-'.$project->REGIONAL)).
+              $this->Html->tag('div',$this->Html->tag('h2',$project->PROJECT_NAME).
+              $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h3',$project->SPI),
+              array('class'=>'data-box-circle '.$var)).
+              $this->Html->tag('div',$this->Html->tag('span','SPI Oficial'),
+              array('class'=>'data-box-content')),
+              array('class'=>'data-box')).
+              $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h4',$project->EXECUTED.'%').
+              $this->Html->tag('div','',array('class'=>'divider white')).
+              $this->Html->tag('h4',$project->PLANNED.'%'),
+              array('class'=>'data-box-circle')).
+              $this->Html->tag('div',$this->Html->tag('span','% Ejecutado').
+              $this->Html->tag('div','',array('class'=>'divider')).
+              $this->Html->tag('span','% Planeado'),
+              array('class'=>'data-box-content')),
+              array('class'=>'data-box')).
+              $this->Html->tag('div',$this->Html->tag('div',$this->Html->tag('h4',$project->ACPU.'%'),
+              array('class'=>'data-box-circle tertiary')).
+              $this->Html->tag('div',$this->Html->tag('span','AC / PV'),array('class'=>'data-box-content')),
+              array('class'=>'data-box')).
+              $this->Html->tag('div','',array('class'=>'divider transparent')).
+              $this->Html->tag('div',$this->Html->tag('h3','CAPEX Planeado (USD)').
+              $this->Html->tag('h4',$project->PLANNED.' M'),
+              array('class'=>'data-chip accent')).
+              $this->Html->tag('div',$this->Html->tag('h3','CAPEX Ejecutado (USD)').
+              $this->Html->tag('h4',$project->CAPEX_EXECUTED.' M'),
+              array('class'=>'data-chip secondary mb-0')),
+              array('class'=>'sheet-content pl-5')),
+              array('class' => 'sheet')),
+              array('action' => 'project', $project->id),
+              array('escape' => false))?>
+          </div>
+          <?php endforeach; ?>
         </div>
     </div>
 </div>
