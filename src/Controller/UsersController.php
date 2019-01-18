@@ -42,50 +42,6 @@ class UsersController extends AppController
     //   $this->token();
       if ($this->request->is('post'))
       {
-    //     $data = $this->request->data;
-    //     $Us = array_values($data)[0];
-    //     $Ps = array_values($data)[1];
-    //     $ch = curl_init();
-    //     curl_setopt($ch, CURLOPT_URL, "http://demo-bog.verano.com.co:7002/ords/primavera_link/hr/v1/autenticate?v_username=".$Us."&v_password=".$Ps);
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    //     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-    //     $headers = array();
-    //     $headers[] = "Authorization: Bearer ".$_SESSION["token"];
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    //     $result = curl_exec($ch);
-    //     if (curl_errno($ch)) {
-    //       echo 'Error:' . curl_error($ch);
-    //     }
-    //     curl_close ($ch);
-    //     $result_arr = json_decode($result, true);
-    //     $var = array_values($result_arr)[0];
-    //     if (count($var) != 0) {
-    //       $var2 = array_values($var)[0];
-    //       $var3 = array_values($var2)[3];
-    //     if ($var3 != 0) {
-    //         // $_SESSION["sessionm"] = $var2;
-    //         $user = $var2;
-    //         print_r($user);
-    //         // print_r($user);
-    //         if ($user) {
-    //           $this->Auth->setUser($user);
-    //           return $this->redirect($this->Auth->redirectUrl());
-    //         }
-    //         else {
-    //           $this->Flash->error('Datos invalidos, intente de nuevo',['key'=>'Auth']);
-    //         }
-    //        //  header("Location: http://localhost/Proyect/users/index");
-    //        // die();
-    //       }
-    //       else {
-    //         $this->Flash->error('Usuario Deshabilitado');
-    //       }
-    //     }
-    //     else {
-    //       $this->Flash->error('Datos incorrectos');
-    //     }
-    //   }
-
         $user = $this->Auth->identify();
         // // // print_r($user);
         if ($user) {
@@ -94,8 +50,8 @@ class UsersController extends AppController
         }
         else {
           $this->Flash->error('Datos invalidos, intente de nuevo',['key'=>'Auth']);
+            }
         }
-      }
       }
      // public function login()
      // {
