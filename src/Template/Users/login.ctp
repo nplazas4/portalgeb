@@ -10,7 +10,7 @@
           <?= $this->Form->create() ?>
           <fieldset>
             <div class="input-field">
-                <?php echo $this->Form->input('text',['label'=>'','placeholder'=>'usuario','class'=>'validate','required']);?>
+                <?php echo $this->Form->input('email',['label'=>'','placeholder'=>'usuario','class'=>'validate','required']);?>
                 <!-- <input id="email" type="email" class="validate">
                 <label for="email">Email</label> -->
             </div>
@@ -21,8 +21,8 @@
             </div>
             </fieldset>
             <div class="btns mb-2">
-                <a href="http://localhost/web/pages/home" class="btn waves-effect btn-depressed">Ingresar</a>
-                <!-- <?//= $this->Form->button('Ingresar',['class'=>'btn waves-effect btn-depressed'])?> -->
+                <!-- <a href="http://localhost/web/pages/home" class="btn waves-effect btn-depressed">Ingresar</a> -->
+                <?= $this->Form->button('Ingresar',['class'=>'btn waves-effect btn-depressed'])?>
             </div>
             <a href="#recoverPassword" class="link modal-trigger">Recuperar contraseña</a>
             <?= $this->Form->end() ?>

@@ -13,10 +13,8 @@ class IndicatorsTable extends AbstractMigration
     public function change()
     {
       $table = $this->table('INDICATORS');
-      $table ->addColumn('CAPEX_USD','string',array('limit' => 100))
-             ->addColumn('CAPEX_COP','string',array('limit' => 500))
-             ->addColumn('RIESGOS','string',array('limit'=> 500))
-             ->addColumn('SPI_EXTERNO','date')
-             -create();
+      $table ->addColumn('RIESGOS','decimal',['precision'=>10,'scale'=>2])
+             ->addColumn('SPI_EXTERNO','decimal',['precision'=>10,'scale'=>1])
+             ->create();
     }
 }

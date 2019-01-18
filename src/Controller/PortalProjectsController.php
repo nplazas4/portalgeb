@@ -31,7 +31,6 @@ class PortalProjectsController extends AppController
 	}
 	public function project()
 	{
-		$this->curva();
 		$this->view = '/Pages/project';
 	}
 	public function Projectcodes()

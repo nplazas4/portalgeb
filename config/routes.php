@@ -89,9 +89,15 @@ Router::scope('/Portal-Projects', function ($routes) {
     $routes->connect('/index', ['controller' => 'PortalProjects', 'action' => 'index']);
     $routes->connect('/companies/', ['controller' => 'PortalProjects', 'action' => 'companies']);
     $routes->connect('/company/', ['controller' => 'PortalProjects', 'action' => 'company']);
-    $routes->connect('/projects/', ['controller' => 'PortalProjects', 'action' => 'projects']);
-    $routes->connect('/project/', ['controller' => 'PortalProjects', 'action' => 'project']);
-    $routes->connect('/Add-Project/', ['controller' => 'Users', 'action' => 'AddProject']);
-    $routes->connect('/Add-EPS/', ['controller' => 'Users', 'action' => 'AddEPS']);
-    $routes->connect('/Add-Project-Code/', ['controller' => 'Users', 'action' => 'AddProjectCode']);
+    $routes->connect('/projects/', ['controller' => 'Projects', 'action' => 'projects']);
+    $routes->connect('/project/', ['controller' => 'Projects', 'action' => 'project']);
+});
+//RUTAS PORTAL ALTERNO
+Router::scope('/Portal-Alterno', function ($routes) {
+    $routes->connect('/index', ['controller' => 'Projects', 'action' => 'index']);
+    $routes->connect('/Codigos-Proyecto/', ['controller' => 'Projectcodes', 'action' => 'index']);
+    $routes->connect('/Eps/', ['controller' => 'Eps', 'action' => 'index']);
+    $routes->connect('/Eps-Edit/', ['controller' => 'Eps', 'action' => 'edit']);
+    $routes->connect('/Project-Codes-Edit/', ['controller' => 'Projectcodes', 'action' => 'edit']);
+    $routes->connect('/Project-Edit/', ['controller' => 'Projects', 'action' => 'edit']);
 });

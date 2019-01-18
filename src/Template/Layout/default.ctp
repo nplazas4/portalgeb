@@ -16,16 +16,16 @@
     $cakeDescription = 'Grupo Energía Bogotá';
 
     // Datos de usuario
+    $user = [
+        'avatar' =>  $current_user['first_name'][0],
+        'name' => $current_user['first_name'].' '. $current_user['last_name'],
+        'email' => $current_user['first_name'].'@geb.com.co'
+    ];
     // $user = [
     //     'avatar' => 'M',
-    //     'name' => $current_user['nombre'] .' '. $current_user['apellido'],
-    //     'email' => $current_user['nombre'].'@geb.com.co'
+    //     'name' => 'Martín Zabala',
+    //     'email' => 'mzabala@geb.com.co'
     // ];
-    $user = [
-        'avatar' => 'M',
-        'name' => 'Martín Zabala',
-        'email' => 'mzabala@geb.com.co'
-    ];
     // Menu
     $menu = [
         [ 'PORTAL PROYECTOS', 'index','PortalProjects'],
@@ -71,8 +71,8 @@
               ['controller'=>'Pages', 'action'=>'home'],
               ['escape' => false,'class'=>'header-logo']
             );?>
-            <?php // if (isset($current_user)):?>
-            <?php // if($current_user['rol']==1):?>
+            <?php  if (isset($current_user)):?>
+            <?php  if($current_user['role']=='admin'):?>
             <div class="header-user dropdown-trigger" data-target='dropdownUser'>
                 <div class="header-user-content">
                     <h2><?= $user['name'] ?></h2>
@@ -80,8 +80,8 @@
                 </div>
                 <div class="header-user-avatar"><?= $user['avatar'] ?></div>
             </div>
-          <?php //endif;?>
-          <?php //endif;?>
+          <?php endif;?>
+          <?php endif;?>
             <ul id='dropdownUser' class='dropdown-content'>
                 <li class="dropdown-user">
                     <div class="header-user-avatar"><?= $user['avatar'] ?></div>
@@ -101,8 +101,8 @@
         <nav data-topbar role="navigation" class="primary">
             <div class="nav-wrapper">
                 <ul>
-                <?php //if (isset($current_user)):?>
-                <?php //if($current_user['rol']==1):?>
+                <?php if (isset($current_user)):?>
+                <?php if($current_user['role']=='admin'):?>
                 <?php foreach ($menu as $item): ?>
                     <!-- <li><a href="<?= $item[1] ?>"><?= $item[0] ?></a></li> -->
                 <li>
@@ -118,8 +118,8 @@
                     ['escape' => false]
                   );?>
                 </li>
-               <?php //endif;?>
-             <?php //endif;?>
+               <?php endif;?>
+             <?php endif;?>
                 </ul>
             </div>
         </nav>

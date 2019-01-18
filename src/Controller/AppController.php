@@ -45,51 +45,56 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-        // $this->loadComponent('Auth',[
-        //     'authenticate'=>[
-        //       'Form'=>[
-        //         'fields'=>[
-        //           'username'=>'email',
-        //           'password'=>'password'
-        //         ]
-        //       ]
-        //     ],
-        //     'loginAction'=>[
-        //       'controller'=>'Users',
-        //       'action'=>'login'
-        //     ],
-        //     'authError'=>'Ingrese sus datos',
-        //     'loginRedirect'=>[
-        //       'controller'=>'Pages',
-        //       'action'=>'home'
-        //     ],
-        //     'logoutRedirect'=>[
-        //       'controller'=>'Users',
-        //       'action'=>'login'
-        //     ],
-        //     // redirigir a un usuario si no cumple requisitos
-        //     'unauthorizedRedirect'=>$this->referer()
-        // ]);
+        //Login
+        $this->loadComponent('Auth',[
+            'authenticate'=>[
+              'Form'=>[
+                'fields'=>[
+                  'username'=>'email',
+                  'password'=>'password'
+                ]
+              ]
+            ],
+            'loginAction'=>[
+              'controller'=>'Users',
+              'action'=>'login'
+            ],
+            'authError'=>'Ingrese sus datos',
+            'loginRedirect'=>[
+              'controller'=>'Pages',
+              'action'=>'home'
+            ],
+            'logoutRedirect'=>[
+              'controller'=>'Users',
+              'action'=>'login'
+            ],
+            //redirigir a un usuario si no cumple requisitos
+            'unauthorizedRedirect'=>$this->referer()
+        ]);
       }
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
-        //$this->loadComponent('Security');
+        // $this->loadComponent('Security');
         // public function beforeFilter(Event $event)
         // {
         //   $this->set('current_user',$this->Auth->user());
         // }
+        public function beforeFilter(Event $event)
+        {
+          $this->set('current_user',$this->Auth->user());
+        }
         //autorizar vistas
-        // public function isAuthorized($user)
-        // {
-        //   if (isset($user['rol']) and $user['rol']===1)
-        //   {
-        //     return true;
-        //   }
-        //   else
-        //   {
-        //     return false;
-        //   }
-        // }
+        public function isAuthorized($user)
+        {
+          if (isset($user['rol']) and $user['rol']===1)
+          {
+            return true;
+          }
+          else
+          {
+            return false;
+          }
+        }
     }
